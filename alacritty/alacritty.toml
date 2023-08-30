@@ -1,0 +1,32 @@
+shell.program = '/bin/zsh'
+# Kanagawa Alacritty Colors
+colors.primary.background = '0x09080E'
+colors.primary.foreground = '0xD3D7CF'
+
+colors.normal.black = '0x090618'
+colors.normal.red = '0xc34043'
+colors.normal.green = '0x76946a'
+colors.normal.yellow =  '0xc0a36e'
+colors.normal.blue =    '0x7e9cd8'
+colors.normal.magenta = '0x957fb8'
+colors.normal.cyan =    '0x6a9589'
+colors.normal.white =   '0xD3D7CF'
+
+colors.bright.black =   '0x727169'
+colors.bright.red =     '0xe82424'
+colors.bright.green =   '0x98bb6c'
+colors.bright.yellow =  '0xe6c384'
+colors.bright.blue =    '0x7fb4ca'
+colors.bright.magenta = '0x938aa9'
+colors.bright.cyan =    '0x7aa89f'
+colors.bright.white =   '0xD3D7CF'
+
+colors.selection.background = '0x2d4f67'
+colors.selection.foreground = '0xc8c093'
+
+[[colors.indexed_colors]]
+index = 16
+color = '0xffa066'
+[[colors.indexed_colors]]
+index = 17
+color = '0xff5d62'
