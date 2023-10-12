@@ -1,14 +1,3 @@
-local lsp = require("lsp-zero")
-lsp.preset("recommended")
--- fix undefined global 'vim'
-lsp.nvim_workspace()
--- language servers
-lsp.ensure_installed({
-    'lua_ls',
-    'bashls',
-    'rust_analyzer',
-    'pylsp'
-})
 require('lspconfig').terraformls.setup {}
 vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
 vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
@@ -59,26 +48,25 @@ require 'lspconfig'.pylsp.setup {
     }
 }
 
-lsp.setup_servers({ 'hls', 'jsonls' })
 -- completion
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-d>'] = cmp.mapping.abort(),
-})
+--local cmp_mappings = lsp.defaults.cmp_mappings({
+--    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+--    ['<C-Space>'] = cmp.mapping.complete(),
+--    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+--    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+--    ['<C-d>'] = cmp.mapping.abort(),
+--})
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
 )
 
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
+--lsp.setup_nvim_cmp({
+--    mapping = cmp_mappings
+--})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -110,8 +98,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 --end
-lsp.setup()
-
 vim.diagnostic.config({
     virtual_text = true
 })

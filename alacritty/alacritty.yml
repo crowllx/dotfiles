@@ -1,5 +1,5 @@
 shell:
-  program: /bin/zsh
+  program: powershell
 colors:
   # Default colors
   primary:
@@ -36,10 +36,10 @@ colors:
     white: '0x909dab'
 # font
 font:
-  size: 10.0
+  size: 14.0
   normal:
-    family: Hack
-    style: Regular
+    family: 'Hack Nerd Font Mono'
+    style: regular
 
 # window
 window:
