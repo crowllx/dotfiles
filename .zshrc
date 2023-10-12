@@ -1,4 +1,4 @@
-ZSH_THEME="af-magic" # set by `omz`
+ZSH_THEME="robbyrussell" # set by `omz`
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -69,7 +69,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(ssh-agent git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,7 +115,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 # path
-export PATH=$PATH:/sbin
+export PATH=$PATH:/sbin:$HOME/.cargo/bin/
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
