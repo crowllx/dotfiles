@@ -5,6 +5,7 @@ vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]
 vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars, set filetype=hcl]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 
+require('mason').setup()
 require('lspconfig').tflint.setup {}
 require('lspconfig').bashls.setup {}
 require 'lspconfig'.lua_ls.setup {

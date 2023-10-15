@@ -5,7 +5,7 @@ if [[ $(echo $extern_monitors | wc -l) -gt 2 ]]; then
     echo $extern_monitor
     xrandr --output HDMI-1-0 --primary --mode 2560x1440 --rotate normal --right-of eDP --output eDP --mode 1920x1200 --rotate normal
     bspc monitor HDMI-1-0 -d 1 2 3 4 5
-    bspc monitor eDP -d 0
+    bspc monitor eDP 0
 else
     bspc monitor eDP -d 1 2 3 4 5
 fi

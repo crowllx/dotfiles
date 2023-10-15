@@ -6,9 +6,10 @@ require("lazy").setup({
     'MunifTanjim/nui.nvim',
     'rebelot/kanagawa.nvim',
     'tpope/vim-fugitive',
-    {'folke/trouble.nvim', dependencies = {"nvim-tree/nvim-web-devicons"}, opts = {}},
+    { 'folke/trouble.nvim', dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
     'nvim-treesitter/playground',
-    {'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
@@ -22,8 +23,8 @@ require("lazy").setup({
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
-    'hrsh7th/nvim-cmp',
-    'hrsh7th/cmp-nvim-lsp',
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
@@ -31,10 +32,19 @@ require("lazy").setup({
     'rafamadriz/friendly-snippets',
 
     'folke/zen-mode.nvim',
-    {'kylechui/nvim-surround',
-        tag = "*"
+    {
+        'kylechui/nvim-surround',
+        tag = "*",
+        Event = "VeryLazy",
+        config = function()
+            require('nvim-surround').setup({})
+        end
     },
-    'windwp/nvim-autopairs',
+    {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        opts = {}
+    }
 
 })
 require('kanagawa').setup({
