@@ -1,74 +1,3 @@
-require('lspconfig').terraformls.setup {}
-vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
-vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
-vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
-vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars, set filetype=hcl]])
-vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
-
-require('mason').setup()
-require('lspconfig').tflint.setup {}
-require('lspconfig').bashls.setup {}
-require 'lspconfig'.lua_ls.setup {
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
-}
-require 'lspconfig'.rust_analyzer.setup {}
-require 'lspconfig'.dockerls.setup {}
-require 'lspconfig'.pylsp.setup {
-    filetypes = { 'python' },
-    settings = {
-        configurationSources = { "flake8" },
-        formatCommand = { "black" },
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    enabled = true,
-                    ignore = { 'E501', 'E231', 'E302', 'E128', 'E124' },
-                    maxLineLength = 120
-                },
-            }
-        }
-    }
-}
-
--- completion
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
---local cmp_mappings = lsp.defaults.cmp_mappings({
---    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
---    ['<C-Space>'] = cmp.mapping.complete(),
---    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
---    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
---    ['<C-d>'] = cmp.mapping.abort(),
---})
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done()
-)
-
---lsp.setup_nvim_cmp({
---    mapping = cmp_mappings
---})
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -98,6 +27,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts)
     end,
 })
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'rust_analyzer',
+        'pylsp',
+        'pyright',
+        'bashls',
+    }
+})
+local lspconfig = require('lspconfig')
+local lsp_capabilites = require('cmp_nvim_lsp').default_capabilites
+require('mason-lspconfig').setup_handlers({
+    function(server_name)
+        lspconfig[server_name].setup({
+            capabilites = lsp_capabilites,
+        })
+    end
+})
+
+--lsp.setup_nvim_cmp({
+--    mapping = cmp_mappings
+--})
 --end
 vim.diagnostic.config({
     virtual_text = true
