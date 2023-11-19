@@ -34,7 +34,6 @@ require("lazy").setup({
     'folke/zen-mode.nvim',
     {
         'kylechui/nvim-surround',
-        tag = "*",
         Event = "VeryLazy",
         config = function()
             require('nvim-surround').setup({})
