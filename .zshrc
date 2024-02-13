@@ -1,5 +1,4 @@
 ZSH_THEME="wshine" # set by `omz`
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -75,7 +74,7 @@ unset WAYLAND_DISPLAY
 plugins=(git taskwarrior)
 
 source $ZSH/oh-my-zsh.sh
-
+source <(gopass completion bash)
 # User configuration
 export PATH=$PATH:~/.local/bin
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -112,7 +111,7 @@ alias doc="docker container"
 alias doi="docker image"
 alias don="docker network"
 alias start="powershell.exe -Command Start-Process"
-alias open-cwd="start firefox file://///wsl.localhost/Ubuntu$(pwd)"
+export WSLP="file://///wsl.localhost/Ubuntu"
 function dsh { docker exec -it $1 bash }
 
 # env
