@@ -1,4 +1,4 @@
-ZSH_THEME="robbyrussell" # set by `omz`
+ZSH_THEME="wshine" # set by `omz`
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
