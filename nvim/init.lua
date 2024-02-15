@@ -10,7 +10,6 @@ vim.g.netrw_hide = 1
 vim.g.netrw_winsize = 25
 vim.g.netrw_browsex_viewer = "cmd.exe /C start"
 vim.g.netrw_browsex_support_remote = true
-
 -- vimwiki
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -26,10 +25,6 @@ end
 vim.g.vimwiki_listsyms = '✗○◐●✓'
 vim.g.vimwiki_list = { { path = '~/notes/', syntax = 'markdown', ext = '.md' } }
 vim.opt.rtp:prepend(lazypath)
-vim.api.nvim_set_keymap('n', '<F10>', ":put=strftime('## %F')<CR>", { noremap = true, silent = false })
-
-
-
 require("wshine.lazy")
 
 

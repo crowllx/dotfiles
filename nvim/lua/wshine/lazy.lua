@@ -3,7 +3,15 @@
 -- Only required if you have packer configured as `opt`
 vim.g.mapleader = "\\"
 require("lazy").setup({
+    {import = "wshine.nvim-tree"},
     'vimwiki/vimwiki',
+    'nvim-tree/nvim-web-devicons',
+    {
+        'nvim-tree/nvim-tree.lua',
+        version = "*",
+        lazy = false,
+        dependencies = { "nvim-tree/nvim-web-devicons", },
+    },
     'MunifTanjim/nui.nvim',
     'rebelot/kanagawa.nvim',
     'tpope/vim-fugitive',
