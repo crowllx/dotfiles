@@ -24,7 +24,7 @@
 #
 ###############################################################################
 
-rule.precedence.color=overdue,scheduled,due.today,uda.,tagged
+rule.precedence.color=overdue,scheduled,uda.,tagged
 
 # General decoration
 color.label=

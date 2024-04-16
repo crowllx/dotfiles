@@ -3,7 +3,7 @@
 -- Only required if you have packer configured as `opt`
 vim.g.mapleader = "\\"
 require("lazy").setup({
-    {import = "wshine.nvim-tree"},
+    { import = "wshine.nvim-tree" },
     'vimwiki/vimwiki',
     'nvim-tree/nvim-web-devicons',
     {
@@ -14,6 +14,7 @@ require("lazy").setup({
     },
     'MunifTanjim/nui.nvim',
     'rebelot/kanagawa.nvim',
+    { "rose-pine/neovim",         name = "rose-pine" },
     'tpope/vim-fugitive',
     { 'folke/trouble.nvim', dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
     'nvim-treesitter/playground',
@@ -54,6 +55,30 @@ require("lazy").setup({
     }
 
 })
+require('rose-pine').setup({
+    variant = "auto",
+    dark_variant = "main",
+    extend_background_behind_borders = true,
+    styles = {
+        bold = true,
+        italic = false,
+        transparency = false,
+    },
+    highlight_groups = {
+        String = { fg = "#98BB6C" },
+    },
+    before_highlight = function(group, highlight, palette)
+        -- Disable all undercurls
+        -- if highlight.undercurl then
+        --     highlight.undercurl = false
+        -- end
+        --
+        -- Change palette colour
+        if highlight.fg == palette.text then
+            --highlight.fg = "#ADBAC7"
+        end
+    end,
+})
 require('kanagawa').setup({
     overrides = function(colors)
         local theme = colors.theme
@@ -75,15 +100,15 @@ require('kanagawa').setup({
     end,
     commentStyle = { italic = false },
     keywordStyle = { italic = false },
-    transparent = true,
+    transparent = false,
 
     colors = {
         palette = {
             fujiWhite = "#ADBAC7",
             oldWhite = "#ADBAC7",
-            carpYellow = "#ADBAC7",
-            boatYellow1 = "#ADBAC7",
-            boatYellow2 = "#ADBAC7"
+            --carpYellow = "#ADBAC7",
+            --boatYellow1 = "#ADBAC7",
+            --boatYellow2 = "#ADBAC7"
         },
         theme = {
             all = {
@@ -94,4 +119,4 @@ require('kanagawa').setup({
         }
     }
 })
-vim.cmd("colorscheme kanagawa-wave")
+vim.cmd("colorscheme rose-pine-main")

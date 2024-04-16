@@ -4,8 +4,10 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
     callback = function(event)
-        local opts = { buffer = event.buf }
+        -- auto completion for omni func
+        vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+        local opts = { buffer = event.buf }
         vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
         vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -44,28 +46,15 @@ require('mason-lspconfig').setup({
                     }
                 }
             })
+        end,
+        ["yamlls"] = function()
+            lspconfig["yamlls"].setup({
+                settings = {
+                    yaml = {
+                        customTags = { "!Node mapping"},
+                    },
+                },
+            })
         end
     }
-})
-
-local cmp = require('cmp')
-
-cmp.setup({
-    sources = {
-        { name = 'nvim_lsp' },
-    },
-    mapping = cmp.mapping.preset.insert({
-        -- Enter key confirms completion item
-        --['<CR>'] = cmp.mapping.confirm({ select = false }),
-        --['<C-j>'] = cmp.mapping.scroll_docs(-4),
-        --['<C-k>'] = cmp.mapping.scroll_docs(4),
-        
-        -- Ctrl + space triggers completion menu
-        --['<C-Space>'] = cmp.mapping.complete(),
-    }),
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
-    },
 })

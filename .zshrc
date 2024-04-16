@@ -111,9 +111,13 @@ alias doc="docker container"
 alias doi="docker image"
 alias don="docker network"
 alias start="powershell.exe -Command Start-Process"
-export WSLP="file://///wsl.localhost/Ubuntu"
+alias powershell="powershell.exe"
+function WSLP { echo "file://///wsl.localhost/Ubuntu$(pwd)" }
 function dsh { docker exec -it $1 bash }
+function md2document {
+    pandoc -f markdown-raw_tex $1 --wrap=preserve -V geometry:margin=1in -V fontsize=12pt -o $2
 
+}
 # env
 export EDITOR='nvim'
 export VISUAL='nvim'
