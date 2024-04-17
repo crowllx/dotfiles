@@ -1,22 +1,23 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -48,13 +49,14 @@
     layout = "us";
     xkbVariant = "";
   };
-
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.wshine = {
+  users.users.crowll = {
     isNormalUser = true;
     description = "wshine";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
+    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -62,21 +64,14 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     qtile
-     alacritty
-     git
-     rofi
-     picom
-     eww
-     zsh
-     dunst
-  ];
-  fonts.packages = with pkgs; [
-  	(nerdfonts.override { fonts = [ "FiraMono" ]; })
-  ];
+  
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "crowll" = import ./home.nix;
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -88,14 +83,15 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # services.openssh.enable = true;
+
+  # enable x server + qtile setup
   services.xserver.enable = true;
-  services.xserver.windowManager.qtile = {
+  services.xserver.displayManager.defaultSession = "none+bspwm";
+  services.xserver.windowManager.bspwm = {
   	enable = true;
-	extraPackages = python3Packages: with python3Packages; [
-		(qtile-extras.overridePythonAttrs(old: { disabledTestPaths = [ "test/widget/test_strava.py" ]; }))
-	];
   };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -109,5 +105,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

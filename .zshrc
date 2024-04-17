@@ -1,9 +1,7 @@
-ZSH_THEME="wshine" # set by `omz`
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+source "$HOME/.config/zsh/zsh-theme"
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 export NODE_PATH=`which node`
 
 # unset wayland display so apps default to xclip. need better solution
@@ -71,9 +69,8 @@ unset WAYLAND_DISPLAY
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git taskwarrior)
+#plugins=(git taskwarrior)
 
-source $ZSH/oh-my-zsh.sh
 source <(gopass completion bash)
 # User configuration
 export PATH=$PATH:~/.local/bin
@@ -100,7 +97,7 @@ export PATH=$PATH:~/.local/bin
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+alias update="sudo nixos-rebuild switch --flake path:$HOME/tools/dotfiles/#default"
 alias zshconfig="nvim ~/.zshrc"
 alias vimconfig="nvim ~/.config/nvim/"
 alias alacconfig="nvim ~/.config/alacritty/alacritty.yml"
@@ -136,4 +133,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
+zstyle ':omz:alpha:lib:git' async-prompt yes
