@@ -29,6 +29,7 @@
      tree
      gopass
      tmux
+     gnupg
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   home.file = {
@@ -46,7 +47,11 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-    
+  # services
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
   # PROGRAMS
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

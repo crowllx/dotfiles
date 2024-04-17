@@ -59,6 +59,12 @@
     shell = pkgs.zsh;
   };
 
+  # mounts
+  fileSystems."/mnt/media/windows-share" = {
+    device = "/dev/disk/by-uuid/18A89EB5A89E913C";
+    fsType = "ntfs";
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
