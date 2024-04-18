@@ -21,7 +21,7 @@
   
   # home manager
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs pkgs; };
     users = {
       "crowll" = import ./home.nix;
     };

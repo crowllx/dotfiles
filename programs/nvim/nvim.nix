@@ -1,8 +1,11 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, inputs, ... }: {
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
   options = {
-    nvim.enable = lib.mkEnableOption "enables nvim";
+    modules.nixvim.enable = lib.mkEnableOption "enables nvim";
   };
-  config = lib.mkIf config.nvim.enable {
-    programs.nixvim.enable = true;
+  config = lib.mkIf config.modules.nixvim.enable {
+    programs.nixvim = {
+      enable = true;
+    };
   };
-};
+}
