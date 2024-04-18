@@ -10,7 +10,7 @@
 
   outputs = { self, nixpkgs, nixos-wsl, ... }@inputs: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      wsl = nixpkgs.lib.nixosSystem {
 	specialArgs = {inherit inputs;};
         system = "x86_64-linux";
         modules = [
@@ -21,8 +21,15 @@
           }
 	  ./machines/wsl/configuration.nix
 	  inputs.home-manager.nixosModules.default
+	  ./programs
         ];
       };
     };
+    
+    # homeConfigurations."crowll" = {
+    #   home-manager.lib.homeManagerConfiguration {
+    #     pkgs = pkgsFor system
+    #   };
+    # };
   };
 }
