@@ -18,6 +18,7 @@
   # environment.
   home.packages = with pkgs; [
     home-manager
+    wl-clipboard
   ];
   # custom modules
   modules.nixvim.enable = true;
