@@ -5,17 +5,28 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
     # include NixOS-WSL modules
-    ./home.nix
+    inputs.home-manager.nixosModules.default
   ];
   
+  # WSL settings
   wsl.enable = true;
-  wsl.defaultUser = "nixos";
+  wsl.defaultUser = "crowll";
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];  
+  
+  # home manager
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "crowll" = import ./home.nix;
+    };
+  }; 
+  # packages/programs
   environment.systemPackages = with pkgs; [
     wget
     git
