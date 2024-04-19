@@ -1,6 +1,7 @@
 function R(name)
     require("plenary.reload").reload_module(name)
 end
+
 vim.g.term = "screen-256color"
 vim.g.netrw_browse_split = 0
 vim.g.netrw_hide = 1

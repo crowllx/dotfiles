@@ -11,7 +11,6 @@ vim.opt.wrap = false
 vim.opt.backup = true
 vim.opt.directory = os.getenv("HOME") .. "/.local/state/nvim/swap/"
 vim.opt.backupdir = os.getenv("HOME") .. "/.local/state/nvim/backup/"
---vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false

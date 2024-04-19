@@ -5,6 +5,9 @@
   };
   config = lib.mkIf config.modules.nixvim.enable {
     programs.nixvim = {
+      enableMan = true;
+      viAlias = true;
+      vimAlias = true;
       enable = true;
       clipboard = {
 	register = "unnamedplus";
@@ -15,7 +18,20 @@
 	enable = true;
 	servers = {
 	  nil_ls.enable = true;
+	  lua-ls = {
+	    enable =true;
+	    settings.telemetry.enable = false;
+	  };
+	  rust-analyzer = {
+	    enable = true;
+	    installCargo = true;
+	    installRustc = true;
+	  };
 	};
+      };
+      plugins.cmp = {
+	enable = true;
+	autoEnableSources = true;
       };
     };
   };

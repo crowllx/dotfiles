@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../programs/nvim/nvim.nix
+    ../../programs/nvim
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -19,6 +19,8 @@
   home.packages = with pkgs; [
     home-manager
     wl-clipboard
+    tmux
+    ripgrep
   ];
   # custom modules
   modules.nixvim.enable = true;
