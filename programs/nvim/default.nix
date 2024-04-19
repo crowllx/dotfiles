@@ -7,7 +7,7 @@
   config = lib.mkIf config.modules.nixvim.enable {
   
     # add lua modules
-    home.file."./config/nvim/plugins" = { source = ./plugins; };
+    home.file.".config/nvim/plugins" = { source = ./plugins; };
 
     programs.nixvim = {
       enable = true;
@@ -54,6 +54,9 @@
         nvim-tree.enable = true;
 	zen-mode.enable = true;
       };
+
+      # load additional config
+      extraConfigLua = ''${builtins.readFile ./options.lua}'';
 
       colorschemes.rose-pine.enable = true;
     };
