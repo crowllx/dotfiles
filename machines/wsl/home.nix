@@ -21,6 +21,7 @@
     wl-clipboard
     tmux
     ripgrep
+    tree
   ];
   # custom modules
   modules.nixvim.enable = true;
