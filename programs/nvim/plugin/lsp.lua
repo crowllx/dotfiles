@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local on_attach = function (_, bufnr)
     vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local opts = { buffer = event.buf }
@@ -18,9 +18,17 @@ local on_attach = function (_, bufnr)
     vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
     vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 end
-
-require('lspconfig').lua_ls.setup {
+lspconfig.lua_ls.setup {
     on_attach = on_attach,
-    capabilities = capabilites,
+    capabilities = lsp_capabilites,
 }
-require('lspconfig').pyright.setup({})
+
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    capabilities = lsp_capabilites,
+})
+
+lspconfig.nil_ls.setup({
+    on_attach = on_attach,
+    capabilities = lsp_capabilities
+})
