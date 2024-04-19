@@ -7,14 +7,14 @@
   config = lib.mkIf config.modules.nixvim.enable {
   
     # add lua modules
-    home.file.".config/nvim/plugins" = { source = ./plugins; };
-
+    home.file.".config/nvim/plugin" = { source = ./plugin; recursive = true; };
     programs.nixvim = {
       enable = true;
       enableMan = true;
       viAlias = true;
       vimAlias = true;
       clipboard.register = "unnamedplus";
+      extraPlugins = [ pkgs.vimPlugins.nvim-lspconfig ];
       plugins = {
         treesitter.enable = true;
         lsp = {

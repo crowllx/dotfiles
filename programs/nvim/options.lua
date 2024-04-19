@@ -50,11 +50,3 @@ vim.g.vimwiki_listsyms = '✗○◐●✓'
 vim.g.vimwiki_list = { { path = '~/notes/', syntax = 'markdown', ext = '.md' } }
 
 -- load plugin configs
-
-require("plugin.cmp")
-require("plugin.lsp")
-require("plugin.telescope")
-require("plugin.nvim-tree")
-require("plugin.treesitter")
-require("plugin.zen")
-require("plugin.rose-pine")
