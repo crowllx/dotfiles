@@ -3,6 +3,7 @@
 {
   imports = [
     ../../programs/nvim
+    ../../programs/zsh
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -22,9 +23,25 @@
     tmux
     ripgrep
     tree
+    python3
+    gopass
+    direnv
+    lorri
+    vimwiki-markdown
+    gnupg
+    docker
   ];
+
+  # services
+  services.lorri.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
   # custom modules
   modules.nixvim.enable = true;
+  modules.zsh.enable = true;
  
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -57,7 +74,7 @@
   #  /etc/profiles/per-user/nixos/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
   };
 
   # Let Home Manager install and manage itself.

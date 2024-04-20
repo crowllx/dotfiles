@@ -16,7 +16,14 @@
   # WSL settings
   wsl.enable = true;
   wsl.defaultUser = "crowll";
+  wsl.useWindowsDriver = true;
   
+  # nix-ld, run unpackaged programs
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # add missing dynamic libraries for unpackages programs
+    # specifically here and not in environment.systemPackages
+  ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];  
   
   # home manager
@@ -25,13 +32,26 @@
     users = {
       "crowll" = import ./home.nix;
     };
-  }; 
+  };
+
+  # docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+  };
+
+  programs.zsh.enable = true;
+  users.users."crowll".shell = pkgs.zsh;
+
   # packages/programs
   environment.systemPackages = with pkgs; [
     wget
     git
     vim
   ];
+
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave

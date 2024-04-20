@@ -16,7 +16,8 @@
       viAlias = true;
       vimAlias = true;
       clipboard.register = "unnamedplus";
-
+      
+      extraPlugins = [ pkgs.vimPlugins.vimwiki ];
       # add required plugins
       plugins = {
         treesitter.enable = true;
@@ -60,7 +61,6 @@
 
       # load additional config
       extraConfigLua = ''${builtins.readFile ./options.lua}'';
-
       colorschemes.rose-pine.enable = true;
     };
   };

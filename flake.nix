@@ -23,13 +23,12 @@
 	specialArgs = {inherit inputs;};
         system = "x86_64-linux";
         modules = [
-          nixos-wsl.nixosModules.default
-          {
+          nixos-wsl.nixosModules.default {
             system.stateVersion = "24.05";
             wsl.enable = true;
           }
-	  ./machines/wsl/configuration.nix
-	  inputs.home-manager.nixosModules.default
+	      ./machines/wsl/configuration.nix
+	      inputs.home-manager.nixosModules.default
         ];
       };
     };

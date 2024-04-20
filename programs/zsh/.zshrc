@@ -1,19 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-source "$HOME/.config/zsh/zsh-theme"
 # Path to your oh-my-zsh installation.
 export NODE_PATH=`which node`
-
-# unset wayland display so apps default to xclip. need better solution
-unset WAYLAND_DISPLAY
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -97,18 +85,13 @@ export PATH=$PATH:~/.local/bin
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias update="sudo nixos-rebuild switch --flake path:$HOME/tools/dotfiles/#default"
-alias zshconfig="nvim ~/.zshrc"
-alias vimconfig="nvim ~/.config/nvim/"
-alias alacconfig="nvim ~/.config/alacritty/alacritty.yml"
-alias tmuxconf="nvim ~/.tmux.conf"
-alias vim="nvim"
-alias vi="nvim"
-alias doc="docker container"
-alias doi="docker image"
-alias don="docker network"
+alias tmux=tmux -2
 alias start="powershell.exe -Command Start-Process"
 alias powershell="powershell.exe"
+function update {
+    echo "#$1"
+    sudo nixos-rebuild switch --flake "${HOME}/tools/dotfiles/#${1}"
+}
 function WSLP { echo "file://///wsl.localhost/Ubuntu$(pwd)" }
 function dsh { docker exec -it $1 bash }
 function md2document {
@@ -133,4 +116,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-zstyle ':omz:alpha:lib:git' async-prompt yes
