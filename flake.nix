@@ -31,6 +31,14 @@
 	      inputs.home-manager.nixosModules.default
         ];
       };
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        system = "x86_64-linux";
+        modules = [
+    	  ./machines/laptop/configuration.nix
+	  inputs.home-manager.nixosModules.default
+        ];
+      };
     };
     
     # homeConfigurations."crowll" = {
