@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
@@ -95,8 +95,13 @@ in
   
   # kernel settings
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "amd-pstate"];
   boot.kernelParams = [
-    # module_blacklist=ideapad_laptop"
+    "module_blacklist=ideapad_laptop"
+    "amdgpu.sg_display=0"
+    "amd_pstate=active"
+    "initcall_blacklist=acpi_cpifreq_init"
+
   ];
   # Enable audio with pipewire & bluetooth
   sound.enable = true;
@@ -112,7 +117,7 @@ in
   hardware.bluetooth.enable = true;
 
   # enable xserver wayland sddm
-  services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
@@ -131,6 +136,11 @@ in
   # nvidia/graphics
   hardware = {
     opengl.enable = true;
+    opengl.extraPackages = [ 
+      pkgs.vaapiVdpau
+      pkgs.rocmPackages.clr
+      pkgs.rocmPackages.clr.icd
+    ];
     nvidia = {
       open = true;
       nvidiaSettings = true;
@@ -150,24 +160,16 @@ in
   # power management
   powerManagement.enable = true;
   services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
-
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100;
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 20;
-
-        START_CHARGE_THRESH_BAT0 = 60;
-        STOP_CHARGE_THRESH = 80;
-    };
-  };
+  # referenced from nixos hardware modules
+  services.power-profiles-daemon.enable = true; # alternative to tlp
+  boot.initrd.kernelModules = [
+    "amdgpu"
+  ];
+  boot.blacklistedKernelModules = lib.optionals (!config.hardware.enableRedistributableFirmware) [
+    "ath3k"
+  ];
+  services.fstrim.enable = true;
   powerManagement.powertop.enable = true;
 
   # Open ports in the firewall.
