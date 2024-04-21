@@ -15,6 +15,7 @@
   home.homeDirectory = "/home/crowll";
   home.stateVersion = "23.11"; # Please read the comment before changing.
   fonts.fontconfig.enable = true;
+  nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [ 
      wget
      alacritty
@@ -35,6 +36,7 @@
      pciutils
      glxinfo
      amdgpu_top
+     discord
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   home.file = {
