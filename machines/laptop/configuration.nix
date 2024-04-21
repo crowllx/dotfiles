@@ -92,7 +92,12 @@ in
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
+  
+  # kernel settings
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [
+    # module_blacklist=ideapad_laptop"
+  ];
   # Enable audio with pipewire & bluetooth
   sound.enable = true;
   security.rtkit.enable = true;
@@ -109,15 +114,14 @@ in
   # enable xserver wayland sddm
   services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-
   # session variables
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
