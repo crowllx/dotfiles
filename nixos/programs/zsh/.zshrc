@@ -88,9 +88,9 @@ export PATH=$PATH:~/.local/bin
 alias tmux=tmux -2
 alias start="powershell.exe -Command Start-Process"
 alias powershell="powershell.exe"
-function update {
-    echo "#$1"
-    sudo nixos-rebuild switch --flake "${HOME}/tools/dotfiles/#${1}"
+function rebuild {
+    echo "$1 $2"
+    sudo nixos-rebuild $1 --flake "${HOME}/tools/dotfiles/nixos/#${2}"
 }
 function WSLP { echo "file://///wsl.localhost/Ubuntu$(pwd)" }
 function dsh { docker exec -it $1 bash }

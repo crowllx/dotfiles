@@ -32,6 +32,8 @@
      waybar
      libnotify
      pciutils
+     glxinfo
+     amdgpu_top
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   home.file = {
