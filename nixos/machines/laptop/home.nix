@@ -21,6 +21,7 @@
      git
      wofi
      mako
+     networkmanagerapplet
      firefox
      btop
      pavucontrol
