@@ -10,17 +10,20 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec $@
   '';
+  
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+      ../../programs/sddm-theme.nix { inherit pkgs; }
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   networking.hostName = "nixos"; # Define your hostname.
   #  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -119,8 +122,8 @@ in
   # enable xserver wayland sddm
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
