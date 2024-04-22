@@ -17,7 +17,6 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-      ../../programs/sddm-theme.nix { inherit pkgs; }
     ];
 
   # Bootloader.
@@ -122,8 +121,21 @@ in
   # enable xserver wayland sddm
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
+    package = pkgs.kdePackages.sddm;
+    extraPackages = with pkgs.kdePackages; [
+      breeze-icons
+      kirigami
+      plasma5support
+      qtsvg
+      qtvirtualkeyboard
+    ];
+  };
+  
+  
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -134,7 +146,10 @@ in
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
-  environment.systemPackages = [ nvidia-offload ];
+  environment.systemPackages = 
+  let sddm-theme = pkgs.kdePackages.callPackage ../../programs/sddm-theme.nix { }; in [
+    sddm-theme
+  ];
   
   # nvidia/graphics
   hardware = {
