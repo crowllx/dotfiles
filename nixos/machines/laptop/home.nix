@@ -37,6 +37,9 @@
      glxinfo
      amdgpu_top
      discord
+     neofetch
+     lorri
+     direnv
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   home.file = {

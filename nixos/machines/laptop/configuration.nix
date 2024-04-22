@@ -151,6 +151,7 @@ in
     nvidia-offload
     pkgs.swayidle
     pkgs.swaylock
+    pkgs.sway-audio-idle-inhibit
   ];
   
   # nvidia/graphics
