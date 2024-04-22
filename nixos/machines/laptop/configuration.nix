@@ -10,7 +10,6 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec $@
   '';
-  
 in
 {
   imports =
@@ -135,7 +134,7 @@ in
     ];
   };
   
-  
+  security.pam.services.swaylock = {}; 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -149,28 +148,30 @@ in
   environment.systemPackages = 
   let sddm-theme = pkgs.kdePackages.callPackage ../../programs/sddm-theme.nix { }; in [
     sddm-theme
+    nvidia-offload
+    pkgs.swayidle
+    pkgs.swaylock
   ];
   
   # nvidia/graphics
   hardware = {
     opengl.enable = true;
+    opengl.driSupport = true;
     opengl.extraPackages = [ 
       pkgs.vaapiVdpau
       pkgs.rocmPackages.clr
       pkgs.rocmPackages.clr.icd
     ];
     nvidia = {
-      open = true;
+      open = false;
       nvidiaSettings = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
       prime = {
-        amdgpuBusId = "PCI:5:0:0";
-        nvidiaBusId = "PCI:1:0:0";
         offload.enable = true;
         offload.enableOffloadCmd = true;
+        amdgpuBusId = "PCI:5:0:0";
+        nvidiaBusId = "PCI:1:0:0";
       };
     };
   };
