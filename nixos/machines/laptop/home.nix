@@ -19,7 +19,6 @@
   home.packages = with pkgs; [ 
      wget
      alacritty
-     git
      wofi
      mako
      networkmanagerapplet
@@ -38,10 +37,23 @@
      amdgpu_top
      discord
      neofetch
-     lorri
-     direnv
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
+    
+  programs.direnv ={
+    enable = true;
+    nix-direnv.enable = true;
+  };
+  programs.git = {
+      enable = true;
+      userName = "wshine";
+      userEmail = "114693487+WinstonShine@users.noreply.github.com";
+      ignores = [
+        "shell.nix"
+        ".envrc"
+        ".direnv/"
+      ];
+  };
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a

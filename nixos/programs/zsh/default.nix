@@ -14,6 +14,7 @@
             initExtra = ''
                 ${builtins.readFile ./zsh-theme }
                 ${builtins.readFile ./.zshrc }
+                export DIRENV_LOG_FORMAT=""
                 eval "$(direnv hook zsh)"
             '';
         };
