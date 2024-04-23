@@ -22,7 +22,6 @@
      wofi
      mako
      networkmanagerapplet
-     firefox
      btop
      pavucontrol
      jq
@@ -37,13 +36,25 @@
      amdgpu_top
      discord
      neofetch
+     texliveSmall
+     libreoffice
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
     
+  xdg= {
+     enable = true;
+      mimeApps = {
+          enable = true;
+          defaultApplications = {
+              "application/pdf" = ["firefox.desktop"];
+          };
+      };
+  };
   programs.direnv ={
     enable = true;
     nix-direnv.enable = true;
   };
+  programs.pandoc.enable = true;
   programs.git = {
       enable = true;
       userName = "wshine";

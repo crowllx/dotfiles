@@ -59,6 +59,13 @@ in
   #  xkbVariant = "";
   #};
   programs.zsh.enable = true;
+  programs.firefox = {
+      enable = true;
+      preferences = {
+          "widget.use-xdg-desktop-portal.mime-handler" = 1;
+          "widget.use-xdg-desktop-portal.file-picker" = 1;
+      };
+  };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crowll = {
     isNormalUser = true;
