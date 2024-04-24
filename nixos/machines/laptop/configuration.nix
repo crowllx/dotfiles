@@ -59,19 +59,21 @@ in
   #  xkbVariant = "";
   #};
   programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
+  programs.zsh.autosuggestions.enable = true;
+  programs.zsh.promptInit = "";
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    plugins = ["git-prompt"];
+  };
   programs.firefox = {
       enable = true;
-      preferences = {
-          "widget.use-xdg-desktop-portal.mime-handler" = 1;
-          "widget.use-xdg-desktop-portal.file-picker" = 1;
-      };
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crowll = {
     isNormalUser = true;
     description = "wshine";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
     shell = pkgs.zsh;
   };
 
@@ -103,7 +105,7 @@ in
   
   # kernel settings
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "amd-pstate"];
+  boot.kernelModules = [ "amd-pstate" "kvm-amd" ];
   boot.kernelParams = [
     "module_blacklist=ideapad_laptop"
     "amdgpu.sg_display=0"
@@ -140,7 +142,6 @@ in
       qtvirtualkeyboard
     ];
   };
-  
   security.pam.services.swaylock = {}; 
   programs.hyprland = {
     enable = true;
@@ -148,12 +149,24 @@ in
   };
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+
+  # virtualization: qemu, libvirtd
+  virtualisation.libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+      };
+  };
+  programs.virt-manager.enable = true;
+
   # session variables
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
   environment.systemPackages = 
   let sddm-theme = pkgs.kdePackages.callPackage ../../programs/sddm-theme.nix { }; in [
+    pkgs.git
     sddm-theme
     nvidia-offload
     pkgs.swayidle

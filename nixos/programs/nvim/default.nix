@@ -40,6 +40,7 @@
           '';
           enable = true;
           servers = {
+            clangd.enable = true;
             nil_ls.enable = true;
             lua-ls = {
               enable =true;
@@ -62,16 +63,15 @@
 	    cmp_luasnip.enable = true;
 	    cmp-path.enable = true;
 	    cmp-omni.enable = true;
-	    cmp-pandoc-nvim.enable =true;
 	    cmp-treesitter.enable = true;
 	    cmp-buffer.enable = true;
 	    comment.enable = true;
 	    nvim-autopairs.enable = true;
 
-            telescope.enable = true;
+        telescope.enable = true;
 	    fugitive.enable = true;
 	    trouble.enable = true;
-            nvim-tree.enable = true;
+        nvim-tree.enable = true;
 	    zen-mode.enable = true;
       };
 

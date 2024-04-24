@@ -8,14 +8,11 @@
             dotDir = ".config/zsh";
             oh-my-zsh = {
                 enable = true;
-                plugins = [ "git" "git-prompt" "git-extras" "aliases" ]; 
+                plugins = [ "git-prompt"]; 
             };
-            syntaxHighlighting.enable = true;
             initExtra = ''
                 ${builtins.readFile ./zsh-theme }
                 ${builtins.readFile ./.zshrc }
-                export DIRENV_LOG_FORMAT=""
-                eval "$(direnv hook zsh)"
             '';
         };
         

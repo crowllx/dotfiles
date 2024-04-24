@@ -49,4 +49,3 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.vimwiki_listsyms = '✗○◐●✓'
 vim.g.vimwiki_list = { { path = '~/notes/', syntax = 'markdown', ext = '.md' } }
 
--- load plugin configs

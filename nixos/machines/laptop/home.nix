@@ -3,17 +3,22 @@
 {
   imports = [
     ../../programs/nvim
-    ../../programs/zsh
   ];
 
   # custom modules
   modules.nixvim.enable = true;
-  modules.zsh.enable = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "crowll";
   home.homeDirectory = "/home/crowll";
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.gnome3.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+  };
   fonts.fontconfig.enable = true;
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [ 
@@ -38,9 +43,40 @@
      neofetch
      texliveSmall
      libreoffice
+     wl-clipboard
+     python311
+     ripgrep
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
-    
+  # bash
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    initExtra = ''
+      source <(gopass completion bash)
+      alias tmux='tmux -2'
+      export DIRENV_LOG_FORMAT=
+      source "/run/current-system/sw/share/bash-completion/completions/git-prompt.sh"
+    '';
+  };
+  # virtualization
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
+  # dir env
+  programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+      config = {
+          global.hide_env_diff = true;
+      };
+  };
+
   xdg= {
      enable = true;
       mimeApps = {
@@ -49,10 +85,6 @@
               "application/pdf" = ["firefox.desktop"];
           };
       };
-  };
-  programs.direnv ={
-    enable = true;
-    nix-direnv.enable = true;
   };
   programs.pandoc.enable = true;
   programs.git = {
