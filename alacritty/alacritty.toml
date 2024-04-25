@@ -9,5 +9,9 @@ dynamic_padding = true
 normal = {family="FiraMono Nerd Font", style="Normal"}
 size = 12
 
+[colors]
+draw_bold_text_with_bright_colors = false
+
 [colors.primary]
 background = "#11111b"
+
