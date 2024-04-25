@@ -64,7 +64,7 @@ in
   programs.zsh.promptInit = "";
   programs.zsh.ohMyZsh = {
     enable = true;
-    plugins = ["git-prompt"];
+    plugins = ["git-prompt" "virtualenv"];
   };
   programs.firefox = {
       enable = true;
@@ -150,7 +150,14 @@ in
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
 
-  # virtualization: qemu, libvirtd
+  # virtualization: qemu, libvirtd, docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+        enable = true;
+        setSocketVariable = true;
+    };
+  };
   virtualisation.libvirtd = {
       enable = true;
       qemu = {

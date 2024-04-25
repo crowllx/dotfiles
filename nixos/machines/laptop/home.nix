@@ -62,6 +62,8 @@
      wl-clipboard
      python311
      ripgrep
+     sox
+     xfce.thunar
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   # bash
