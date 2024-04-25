@@ -17,7 +17,7 @@
     gtk.enable = true;
     package = pkgs.gnome3.adwaita-icon-theme;
     name = "Adwaita";
-    size = 24;
+    size = 20;
   };
   gtk = {
       enable = true;
@@ -31,8 +31,8 @@
       };
 
       font = {
-        name = "Sans";
-        size = 11;
+        name = "Ubuntu";
+        size = 12;
       };
   };
   fonts.fontconfig.enable = true;
@@ -64,6 +64,7 @@
      ripgrep
      sox
      xfce.thunar
+     ubuntu_font_family
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
   # bash
