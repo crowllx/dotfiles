@@ -22,12 +22,12 @@
   gtk = {
       enable = true;
       theme = {
-        package = pkgs.flat-remix-gtk;
-        name = "Flat-Remix-GTK-Grey-Darkest";
+          package = pkgs.rose-pine-gtk-theme;
+          name = "rose-pine";
       };
       iconTheme = {
-        package = pkgs.gnome.adwaita-icon-theme;
-        name = "Adwaita";
+        package = pkgs.rose-pine-icon-theme;
+        name = "rose-pine";
       };
 
       font = {
@@ -58,7 +58,6 @@
      discord
      neofetch
      texliveSmall
-     libreoffice
      wl-clipboard
      python311
      ripgrep
@@ -112,6 +111,7 @@
       userEmail = "114693487+WinstonShine@users.noreply.github.com";
       ignores = [
         "shell.nix"
+        ".venv"
         ".envrc"
         ".direnv/"
       ];

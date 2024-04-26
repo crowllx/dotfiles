@@ -15,3 +15,6 @@ draw_bold_text_with_bright_colors = false
 [colors.primary]
 background = "#11111b"
 
+[keyboard]
+bindings = [{ key = "F11", action = "ToggleFullscreen"}]
+
