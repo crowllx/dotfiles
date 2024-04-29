@@ -7,7 +7,7 @@ dynamic_padding = true
 
 [font]
 normal = {family="FiraMono Nerd Font", style="Normal"}
-size = 12
+size = 14
 
 [colors]
 draw_bold_text_with_bright_colors = false

@@ -66,14 +66,12 @@ in
     enable = true;
     plugins = ["git-prompt" "virtualenv"];
   };
-  programs.firefox = {
-      enable = true;
-  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crowll = {
     isNormalUser = true;
     description = "wshine";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
+    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd"];
     shell = pkgs.zsh;
   };
 
@@ -153,10 +151,6 @@ in
   # virtualization: qemu, libvirtd, docker
   virtualisation.docker = {
     enable = true;
-    rootless = {
-        enable = true;
-        setSocketVariable = true;
-    };
   };
   virtualisation.libvirtd = {
       enable = true;

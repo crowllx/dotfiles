@@ -51,6 +51,13 @@
               installCargo = true;
               installRustc = true;
             };
+            pylsp = {
+                enable = true;
+                settings.plugins = {
+                    ruff.enabled = true;
+                };
+            };
+            ruff-lsp.enable = true;
           };
         };
         cmp = {

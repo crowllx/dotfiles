@@ -32,7 +32,7 @@
 
       font = {
         name = "Ubuntu";
-        size = 12;
+        size = 14;
       };
   };
   fonts.fontconfig.enable = true;
@@ -58,14 +58,35 @@
      discord
      neofetch
      texliveSmall
+     imagemagick
      wl-clipboard
      python311
+     python311Packages.pwndbg
      ripgrep
      sox
      xfce.thunar
      ubuntu_font_family
+     inetutils
+     lsof
+        
+     # python stuff
+     python311Packages.python-lsp-server
+     python311Packages.python-lsp-ruff
+     ruff
+     # binary analysis
+     gdb
+     gef
      (nerdfonts.override { fonts = [ "FiraMono" ];})
   ];
+
+  # firefox
+  programs.firefox = {
+      enable = true;
+      profiles.crowll = {
+        isDefault = true;
+        name = "crowll";
+      };
+  };
   # bash
   programs.bash = {
     enable = true;
