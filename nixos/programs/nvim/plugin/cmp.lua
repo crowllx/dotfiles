@@ -1,8 +1,21 @@
+-- lsp zero
+local lsp = require("lsp-zero").preset({})
+lsp.on_attach(function(client, bufnr)
+    lsp.default_keymaps({ buffer = bufnr })
+end)
+
+-- cmp
 local cmp = require('cmp')
 local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+-- snippets / autopairs
 require("nvim-autopairs").setup({})
 ls = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+
+
+-- key mapping
 vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
@@ -10,7 +23,7 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
     if ls.choice_active() then
         ls.change_choice(1)
     end
-end, {silent = true})
+end, { silent = true })
 
 cmp.event:on(
     'confirm_done',
@@ -19,6 +32,10 @@ cmp.event:on(
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'nvim_lua' },
+        { name = 'buffer' },
+        { name = 'path' },
     },
     mapping = {
         ['<Tab>'] = cmp.mapping.confirm({ select = true }),

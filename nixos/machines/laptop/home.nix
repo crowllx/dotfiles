@@ -61,7 +61,6 @@
      imagemagick
      wl-clipboard
      python311
-     python311Packages.pwndbg
      ripgrep
      sox
      xfce.thunar
@@ -69,10 +68,6 @@
      inetutils
      lsof
         
-     # python stuff
-     python311Packages.python-lsp-server
-     python311Packages.python-lsp-ruff
-     ruff
      # binary analysis
      gdb
      gef
