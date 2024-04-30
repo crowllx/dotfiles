@@ -6,6 +6,9 @@ lsp_config["pylsp"].setup({
     settings = {
         pylsp = {
             plugins = {
+                ruff = {
+                    enabled = true,
+                },
                 jedi_completion = {
                     enabled = true,
                     include_params = true,
@@ -14,7 +17,6 @@ lsp_config["pylsp"].setup({
         },
     },
 })
-lsp_config["ruff"].setup({})
 lsp_config["bashls"].setup({})
 lsp_config["clangd"].setup({})
 lsp_config["tsserver"].setup({})

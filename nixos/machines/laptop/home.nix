@@ -45,6 +45,7 @@
      networkmanagerapplet
      btop
      pavucontrol
+     fd
      jq
      tree
      gopass
