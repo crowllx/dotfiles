@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
+-- server setup
 local default_setup = function(server)
     lspconfig[server].setup({
         capabilities = lsp_capabilities,
@@ -33,7 +34,7 @@ end
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = {},
+    ensure_installed = { 'bashls', 'lua_ls', 'tsserver', 'pylsp', 'rust_analyzer', 'ruff_lsp' },
     handlers = {
         default_setup,
         ['lua_ls'] = function()
@@ -51,9 +52,38 @@ require('mason-lspconfig').setup({
             lspconfig["yamlls"].setup({
                 settings = {
                     yaml = {
-                        customTags = { "!Node mapping"},
+                        customTags = { "!Node mapping" },
                     },
                 },
+            })
+        end,
+        ["pylsp"] = function()
+            lspconfig['pylsp'].setup({
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            ruff = {
+                                enabled = true,
+                            },
+                            jedi_completions = {
+                                enabled = true,
+                                include_params = true,
+                            },
+                            pycodestyle = {
+                                enabled = false
+                            },
+                            pyflakes = {
+                                enabled = false,
+                            },
+                            autopep8 = {
+                                enabled = false,
+                            },
+                            yapf = {
+                                enabled = false,
+                            },
+                        }
+                    }
+                }
             })
         end
     }

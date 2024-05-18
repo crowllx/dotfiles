@@ -1,0 +1,142 @@
+-- This file can be loaded by calling `lua require('plugins')` from your init.vim
+--
+-- Only required if you have packer configured as `opt`
+require("lazy").setup({
+    { import = "plugins" },
+    'vimwiki/vimwiki',
+    'tpope/vim-commentary',
+    'nvim-tree/nvim-web-devicons',
+    {
+        'nvim-tree/nvim-tree.lua',
+        version = "*",
+        lazy = false,
+        dependencies = { "nvim-tree/nvim-web-devicons", },
+    },
+    'MunifTanjim/nui.nvim',
+    {
+        'catppuccin/nvim',
+        name = "catppuccin",
+        opts = {
+            transparent_background = true,
+            no_italic = true,
+            default_integrations = true,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                nvimtree = true,
+                treesitter = true,
+            }
+        }
+    },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        opts = {
+            variant = "auto",
+            dark_variant = "main",
+            extend_background_behind_borders = true,
+            enable = {
+                terminal = true,
+                migrations = true,
+            },
+            styles = {
+                bold = true,
+                italic = false,
+                transparency = true,
+            },
+
+            groups = {
+                border = "muted",
+                link = "iris",
+                panel = "surface",
+
+                error = "love",
+                hint = "iris",
+                info = "foam",
+                note = "pine",
+                todo = "rose",
+                warn = "gold",
+
+                git_add = "foam",
+                git_change = "rose",
+                git_delete = "love",
+                git_dirty = "rose",
+                git_ignore = "muted",
+                git_merge = "iris",
+                git_rename = "pine",
+                git_stage = "iris",
+                git_text = "rose",
+                git_untracked = "subtle",
+
+                h1 = "iris",
+                h2 = "foam",
+                h3 = "rose",
+                h4 = "gold",
+                h5 = "pine",
+                h6 = "foam",
+            },
+            before_hightlight = function(group, highlight, palette)
+                if highlight.undercurl then
+                    highlight.undercurl = false
+                end
+            end
+        }
+    },
+    'tpope/vim-fugitive',
+    { 'folke/trouble.nvim', dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            local builtin = require('telescope.builtin')
+            vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
+            vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+            vim.keymap.set('n', '<leader>ps', function()
+                builtin.grep_string({ search = vim.fn.input("Grep > ") })
+            end)
+            vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+        end
+    },
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        lazy = true,
+        config = false,
+        init = function()
+            -- Disable automatic setup, we are doing it manually
+            vim.g.lsp_zero_extend_cmp = 0
+            vim.g.lsp_zero_extend_lspconfig = 0
+        end,
+    },
+    {
+        'williamboman/mason.nvim',
+        lazy = false,
+        config = true,
+    },
+    'williamboman/mason-lspconfig.nvim',
+    "hrsh7th/cmp-nvim-lsp",
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-nvim-lua',
+    {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+            'rafamadriz/friendly-snippets'
+        },
+    },
+    'saadparwaiz1/cmp_luasnip',
+    {
+        'kylechui/nvim-surround',
+        Event = "VeryLazy",
+        config = function()
+            require('nvim-surround').setup({})
+        end
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        opts = {}
+    }
+
+})
+vim.cmd("colorscheme rose-pine-moon")

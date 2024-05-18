@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ln -s ~/tools/dotfiles/nvim/ ~/.config/nvim  
+ln -s ~/tools/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/tools/dotfiles/.zshrc ~/.zshrc
+ln -s ~/tools/dotfiles/wshine.zsh-theme ~/.oh-my-zsh/themes/wshine.zsh-theme

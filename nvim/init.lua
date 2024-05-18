@@ -1,10 +1,10 @@
-require("wshine.set")
-require("wshine.remap")
+require("options.set")
+require("options.remap")
 
 function R(name)
     require("plenary.reload").reload_module(name)
 end
-vim.g.term = "screen-256color"
+--vim.g.term = "screen-256color"
 vim.g.netrw_browse_split = 0
 vim.g.netrw_hide = 1
 vim.g.netrw_winsize = 25
@@ -12,6 +12,7 @@ vim.g.netrw_browsex_viewer = "cmd.exe /C start"
 vim.g.netrw_browsex_support_remote = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.o.termguicolors = true
 -- vimwiki
 vim.g.vimwiki_listsyms = '✗○◐●✓'
 vim.g.vimwiki_list = { { path = '~/notes/', syntax = 'markdown', ext = '.md' } }
@@ -30,6 +31,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("wshine.lazy")
+require("options.lazy")
 
 

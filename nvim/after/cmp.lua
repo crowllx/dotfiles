@@ -8,6 +8,9 @@ cmp.event:on(
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'buffer '},
+        { name = 'path'},
+        { name = 'nvim_lua'},
     },
     mapping = {
         ['<Tab>'] = cmp.mapping.confirm({ select = true }),
