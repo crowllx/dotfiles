@@ -1,0 +1,69 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "vim": {
+    "use_system_clipboard": "never"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "buffer_font_family": "FiraMono Nerd Font",
+  "vim_mode": true,
+  "ui_font_size": 20,
+  "buffer_font_size": 18,
+  "relative_line_numbers": true,
+  "scrollbar": {
+    "show": "never"
+  },
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "analyses": {
+          "composites": false
+        }
+      }
+    }
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "wrap_guides": [80], // theme customization
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "rose-pine-custom"
+  },
+  "experimental.theme_overrides": {
+    "background.appearance": "transparent",
+    "editor.background": "#11111b",
+    "editor.gutter.background": "#11111b",
+    "border": "#11111b",
+    "border.variant": "#11111b",
+    "border.focused": "#11111b",
+    "border.selected": "#11111b",
+    "border.transparent": "#11111b",
+    "border.disabled": "#11111b",
+    "panel.background": "#11111b",
+    "background": "#11111b",
+    "status_bar.background": "#11111b",
+    "title_bar.background": "#11111b",
+    "toolbar.background": "#11111b",
+    "tab_bar.background": "#11111b",
+    "tab.inactive_background": "#11111b",
+    "tab.active_background": "#11111b",
+    "terminal.background": "#11111b",
+    "scrollbar.thumb.background": "#545d66"
+  }
+}
