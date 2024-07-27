@@ -44,7 +44,6 @@ require("lazy").setup({
                 italic = false,
                 transparency = true,
             },
-
             groups = {
                 border = "muted",
                 link = "iris",
@@ -75,6 +74,9 @@ require("lazy").setup({
                 h5 = "pine",
                 h6 = "foam",
             },
+            highlight_groups = {
+                ["@variable.member"] = { fg = "#FFFFFF"}
+            },
             before_hightlight = function(group, highlight, palette)
                 if highlight.undercurl then
                     highlight.undercurl = false
@@ -82,6 +84,7 @@ require("lazy").setup({
             end
         }
     },
+    'nvim-treesitter/playground',
     'tpope/vim-fugitive',
     { 'folke/trouble.nvim', dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
     {

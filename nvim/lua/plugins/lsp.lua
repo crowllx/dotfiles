@@ -35,35 +35,47 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
-        pylsp = function()
-            require('lspconfig').pylsp.setup({
-                settings = {
-                    pylsp = {
-                        plugins = {
-                            ruff = {
-                                enabled = true,
-                            },
-                            jedi_completions = {
-                                enabled = true,
-                                include_params = true,
-                            },
-                            pycodestyle = {
-                                enabled = false
-                            },
-                            pyflakes = {
-                                enabled = false,
-                            },
-                            autopep8 = {
-                                enabled = false,
-                            },
-                            yapf = {
-                                enabled = false,
-                            },
+                pylsp = function()
+                    require('lspconfig').pylsp.setup({
+                        settings = {
+                            pylsp = {
+                                plugins = {
+                                    ruff = {
+                                        enabled = true,
+                                    },
+                                    jedi_completions = {
+                                        enabled = true,
+                                        include_params = true,
+                                    },
+                                    pycodestyle = {
+                                        enabled = false
+                                    },
+                                    pyflakes = {
+                                        enabled = false,
+                                    },
+                                    autopep8 = {
+                                        enabled = false,
+                                    },
+                                    yapf = {
+                                        enabled = false,
+                                    },
+                                }
+                            }
                         }
-                    }
-                }
-            })
-        end
+                    })
+                end,
+                gopls = function()
+                    require('lspconfig').gopls.setup({
+                        settings = {
+                            gopls = {
+                                analyses = {
+                                    composites = false,
+                                }
+                            }
+                        }
+                    })
+
+                end
             }
         })
     end

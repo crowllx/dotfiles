@@ -10,7 +10,7 @@ position = { x = 200, y = 100}
 
 
 [font]
-normal = {family="FiraMono Nerd Font", style="Normal"}
+normal = {family="FiraMono Nerd Font"}
 size = 14
 
 [colors]
