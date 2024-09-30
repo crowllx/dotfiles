@@ -3,6 +3,16 @@
 -- Only required if you have packer configured as `opt`
 require("lazy").setup({
     { import = "plugins" },
+    {
+        'rmehri01/onenord.nvim',
+        opts = {
+            borders = false,
+            disable = {
+                background = true,
+                float_background = true
+            }
+        }
+    },
     'vimwiki/vimwiki',
     'tpope/vim-commentary',
     'nvim-tree/nvim-web-devicons',
@@ -74,9 +84,6 @@ require("lazy").setup({
                 h5 = "pine",
                 h6 = "foam",
             },
-            highlight_groups = {
-                ["@variable.member"] = { fg = "#FFFFFF"}
-            },
             before_hightlight = function(group, highlight, palette)
                 if highlight.undercurl then
                     highlight.undercurl = false
@@ -86,7 +93,64 @@ require("lazy").setup({
     },
     'nvim-treesitter/playground',
     'tpope/vim-fugitive',
-    { 'folke/trouble.nvim', dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
+    {
+        'folke/trouble.nvim',
+        opts = {
+            modes = {
+                symbols = {
+                    mode = "lsp_document_symbols",
+                    win = {
+                        focusable = true,
+                        relative = "editor",
+                        border = "rounded",
+                        focus = true,
+                        size = { width = .3, height = 1 },
+                        zindex = 200
+                    },
+                }
+            }
+        },
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('lualine').setup()
+        end
+    },
     {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -142,4 +206,4 @@ require("lazy").setup({
     }
 
 })
-vim.cmd("colorscheme rose-pine-moon")
+vim.cmd("colorscheme catppuccin-mocha")

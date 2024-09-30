@@ -50,3 +50,5 @@ calendar.offset.value=0
 calendar.holidays=full
 
 news.version=2.6.0
+confirmation=no
+recurrence.confirmation=no

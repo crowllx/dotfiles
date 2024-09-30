@@ -1,8 +1,8 @@
-import = ["~/.config/alacritty/rose-pine.toml"]
+import = ["~/.config/alacritty/rose-pine-moon.toml"]
 #[env]
 #TERM = "xterm-256color"
 [window]
-opacity = 0.90
+opacity = 0.99
 padding =  {x=5,y=5}
 dynamic_padding = true
 dimensions = {columns = 140, lines = 45}
@@ -10,15 +10,19 @@ position = { x = 200, y = 100}
 
 
 [font]
-normal = {family="FiraMono Nerd Font"}
+normal = {family="FiraMono Nerd Font Mono"}
 size = 14
 
 [colors]
 draw_bold_text_with_bright_colors = false
 
 [colors.primary]
-background = "#11111b"
+background = "#0c0c0d"
 
 [keyboard]
 bindings = [{ key = "F11", action = "ToggleFullscreen"}]
 
+
+[env]
+TERM = "xterm-256color"
+WINIT_X11_SCALE_FACTOR = "1"

@@ -68,6 +68,7 @@ return {
                     require('lspconfig').gopls.setup({
                         settings = {
                             gopls = {
+                                usePlaceholders = true,
                                 analyses = {
                                     composites = false,
                                 }

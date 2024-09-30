@@ -42,7 +42,7 @@
   "wrap_guides": [80], // theme customization
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "rose-pine-custom",
     "dark": "rose-pine-custom"
   },
   "experimental.theme_overrides": {
