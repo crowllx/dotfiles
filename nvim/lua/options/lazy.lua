@@ -4,6 +4,18 @@
 require("lazy").setup({
     { import = "plugins" },
     {
+        "cdmill/neomodern.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("neomodern").setup({
+                -- optional configuration here
+                transparent = true,
+            })
+            require("neomodern").load()
+        end,
+    },
+    {
         'rmehri01/onenord.nvim',
         opts = {
             borders = false,
@@ -12,6 +24,21 @@ require("lazy").setup({
                 float_background = true
             }
         }
+    },
+    {
+        "gbprod/nord.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("nord").setup({
+                transparent = true,
+                terminal_colors = true,
+                styles = {
+                    comments = { italic = false },
+                    keywords = { bold = true },
+                },
+            })
+        end,
     },
     'vimwiki/vimwiki',
     'tpope/vim-commentary',
@@ -206,4 +233,4 @@ require("lazy").setup({
     }
 
 })
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd.colorscheme("nord")
