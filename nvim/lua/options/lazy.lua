@@ -4,41 +4,22 @@
 require("lazy").setup({
     { import = "plugins" },
     {
-        "cdmill/neomodern.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("neomodern").setup({
-                -- optional configuration here
-                transparent = true,
-            })
-            require("neomodern").load()
-        end,
-    },
-    {
         'rmehri01/onenord.nvim',
-        opts = {
-            borders = false,
-            disable = {
-                background = true,
-                float_background = true
-            }
-        }
-    },
-    {
-        "gbprod/nord.nvim",
-        lazy = false,
-        priority = 1000,
         config = function()
-            require("nord").setup({
-                transparent = true,
-                terminal_colors = true,
-                styles = {
-                    comments = { italic = false },
-                    keywords = { bold = true },
+            local colors = require("onenord.colors").load()
+            require("onenord").setup({
+                fade_nc = true,
+                disable = {
+                    background = true,
+                    float_background = true,
+                    cursor_line = false 
                 },
+                custom_highlights = {
+                    ["@type"] = { fg = colors.light_green},
+                    ["@module"] = { fg = colors.light_green },
+                }
             })
-        end,
+        end
     },
     'vimwiki/vimwiki',
     'tpope/vim-commentary',
@@ -233,4 +214,4 @@ require("lazy").setup({
     }
 
 })
-vim.cmd.colorscheme("nord")
+vim.cmd.colorscheme("onenord")
