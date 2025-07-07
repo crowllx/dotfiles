@@ -1,5 +1,6 @@
 require("options.set")
 require("options.remap")
+require("options.autocmds")
 
 function R(name)
     require("plenary.reload").reload_module(name)

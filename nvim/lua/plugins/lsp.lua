@@ -8,74 +8,73 @@ return {
         { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
-        -- This is where all the LSP shenanigans will live
-        local lsp_zero = require('lsp-zero')
-        lsp_zero.extend_lspconfig()
+        local lspconfig_defaults = require('lspconfig').util.default_config
+        lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+            'force',
+            lspconfig_defaults.capabilities,
+            require('cmp_nvim_lsp').default_capabilities()
+        )
+        vim.api.nvim_create_autocmd('LspAttach', {
+            desc = 'LSP actions',
+            callback = function(event)
+                local opts = { buffer = event.buf }
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+                vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+                vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+                vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+                vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+                vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+                vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            end,
+        })
 
-        --- if you want to know more about lsp-zero and mason.nvim
-        --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-        lsp_zero.on_attach(function(client, bufnr)
-            -- see :help lsp-zero-keybindings
-            -- to learn the available actions
-            lsp_zero.default_keymaps({ buffer = bufnr })
-        end)
-        require('lspconfig').gdscript.setup({});
-        require('mason-lspconfig').setup({
-            ensure_installed = {},
-            handlers = {
-                -- this first function is the "default handler"
-                -- it applies to every language server without a "custom handler"
-                function(server_name)
-                    require('lspconfig')[server_name].setup({})
-                end,
+        require('lspconfig').gopls.setup({
+            settings = {
+                gopls = {
+                    semanticTokens = true,
+                    usePlaceholders = true,
+                    analyses = {
+                        composites = false,
+                        ST1021 = false,
+                    },
+                    staticcheck = true,
+                    hints = {
+                        assignVariableTypes = true,
+                        rangeVariableTypes = true,
+                    },
+                }
+            }
+        })
+        require('lspconfig').lua_ls.setup({})
 
-                -- this is the "custom handler" for `lua_ls`
-                lua_ls = function()
-                    -- (Optional) Configure lua language server for neovim
-                    local lua_opts = lsp_zero.nvim_lua_ls()
-                    require('lspconfig').lua_ls.setup(lua_opts)
-                end,
-                pylsp = function()
-                    require('lspconfig').pylsp.setup({
-                        settings = {
-                            pylsp = {
-                                plugins = {
-                                    ruff = {
-                                        enabled = true,
-                                    },
-                                    jedi_completions = {
-                                        enabled = true,
-                                        include_params = true,
-                                    },
-                                    pycodestyle = {
-                                        enabled = false
-                                    },
-                                    pyflakes = {
-                                        enabled = false,
-                                    },
-                                    autopep8 = {
-                                        enabled = false,
-                                    },
-                                    yapf = {
-                                        enabled = false,
-                                    },
-                                }
-                            }
-                        }
-                    })
-                end,
-                gopls = function()
-                    require('lspconfig').gopls.setup({
-                        settings = {
-                            gopls = {
-                                usePlaceholders = true,
-                                analyses = {
-                                    composites = false,
-                                }
-                            }
-                        }
-                    })
-                end
+        require('lspconfig').pylsp.setup({
+            settings = {
+                pylsp = {
+                    plugins = {
+                        ruff = {
+                            enabled = true,
+                        },
+                        jedi_completions = {
+                            enabled = true,
+                            include_params = true,
+                        },
+                        pycodestyle = {
+                            enabled = false
+                        },
+                        pyflakes = {
+                            enabled = false,
+                        },
+                        autopep8 = {
+                            enabled = false,
+                        },
+                        yapf = {
+                            enabled = false,
+                        },
+                    }
+                }
             }
         })
     end

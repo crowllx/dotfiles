@@ -4,6 +4,37 @@
 require("lazy").setup({
     { import = "plugins" },
     {
+        'mellow-theme/mellow.nvim'
+    },
+    {
+        "dgox16/oldworld.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            local p = require("oldworld.palette")
+            require("oldworld").setup({
+                terminal_colors = true,
+                variant = "cooler",
+                highlight_overrides = {
+                    Normal = { bg = 'NONE' },
+                    NormalNC = { bg = 'NONE' },
+                    NormalFloat = { bg = 'NONE' },
+                    TelescopeNormal = { bg = 'NONE' },
+                    TelescopeBorder = { fg = p.gray4, bg = 'NONE' },
+                    TelescopePromptNormal = { bg = 'NONE' },
+                    TelescopePromptBorder = { fg = p.gray4, bg = 'NONE' },
+                    TelescopePreviewTitle = { bg = 'NONE' },
+                    TelescopeResultsTitle = { bg = 'NONE' },
+                    SignColumn = { bg = 'NONE' },
+                },
+                integrations = {
+                    telescope = true,
+                    cmp = true,
+                }
+            })
+        end
+    },
+    {
         'rmehri01/onenord.nvim',
         config = function()
             local colors = require("onenord.colors").load()
@@ -12,10 +43,10 @@ require("lazy").setup({
                 disable = {
                     background = true,
                     float_background = true,
-                    cursor_line = false 
+                    cursor_line = false
                 },
                 custom_highlights = {
-                    ["@type"] = { fg = colors.light_green},
+                    ["@type"] = { fg = colors.light_green },
                     ["@module"] = { fg = colors.light_green },
                 }
             })
