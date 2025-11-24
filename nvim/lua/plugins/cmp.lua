@@ -2,7 +2,13 @@ return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-        { 'L3MON4D3/LuaSnip' },
+        "L3MON4D3/LuaSnip",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "rafamadriz/friendly-snippets",
+        "saadparwaiz1/cmp_luasnip",
     },
     config = function()
         -- Here is where you configure the autocompletion settings.
@@ -17,15 +23,16 @@ return {
         vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-H>", function() ls.jump(-1) end, { silent = true })
+
         vim.keymap.set("i", "<C-x><C-o>", cmp.complete)
         cmp.setup({
             -- formatting = lsp_zero.cmp_format({ details = true }),
             sources = {
-                { name = 'nvim_lsp' },
-                { name = 'buffer ' },
-                { name = 'path' },
-                { name = 'nvim_lua' },
-                { name = 'luasnip' }
+                { name = "nvim_lsp" },
+                { name = "buffer " },
+                { name = "path" },
+                { name = "nvim_lua" },
+                { name = "luasnip" },
             },
             window = {
                 completion = cmp.config.window.bordered(),
