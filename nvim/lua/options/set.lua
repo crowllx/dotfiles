@@ -9,7 +9,7 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 vim.opt.backup = true
-vim.opt.swapfile = false 
+vim.opt.swapfile = false
 vim.opt.directory = os.getenv("HOME") .. "/.local/state/nvim/swap/"
 vim.opt.backupdir = os.getenv("HOME") .. "/.local/state/nvim/backup/"
 --vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -25,3 +25,9 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.api.nvim_set_option("clipboard", "unnamed")
+
+
+vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg = "none" })

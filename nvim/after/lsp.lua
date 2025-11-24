@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -27,7 +26,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- server setup
 local default_setup = function(server)
-    lspconfig[server].setup({
+    vim.lsp.config(server, {
         capabilities = lsp_capabilities,
     })
 end
@@ -38,7 +37,7 @@ require('mason-lspconfig').setup({
     handlers = {
         default_setup,
         ['lua_ls'] = function()
-            lspconfig['lua_ls'].setup({
+            vim.lsp.config('lua_ls', {
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -49,7 +48,7 @@ require('mason-lspconfig').setup({
             })
         end,
         ["yamlls"] = function()
-            lspconfig["yamlls"].setup({
+            vim.lsp.config("yamlls", {
                 settings = {
                     yaml = {
                         customTags = { "!Node mapping" },
@@ -58,7 +57,7 @@ require('mason-lspconfig').setup({
             })
         end,
         ["pylsp"] = function()
-            lspconfig['pylsp'].setup({
+            vim.lsp.config('pylsp', {
                 settings = {
                     pylsp = {
                         plugins = {

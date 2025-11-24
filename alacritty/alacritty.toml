@@ -4,6 +4,7 @@
 opacity = 0.95
 padding =  {x=5,y=5}
 dynamic_padding = true
+
 dimensions = {columns = 140, lines = 45}
 position = { x = 200, y = 100}
 
@@ -27,4 +28,4 @@ TERM = "xterm-256color"
 WINIT_X11_SCALE_FACTOR = "1"
 
 [general]
-import = ["~/.config/alacritty/oldworld.toml"]
+import = ["~/.config/alacritty/onenord.toml"]

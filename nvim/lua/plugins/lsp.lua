@@ -8,17 +8,20 @@ return {
         { 'williamboman/mason-lspconfig.nvim' },
     },
     config = function()
+        vim.lsp.buf.hover({ buffer = 'rounded' })
         local lspconfig_defaults = require('lspconfig').util.default_config
         lspconfig_defaults.capabilities = vim.tbl_deep_extend(
             'force',
             lspconfig_defaults.capabilities,
             require('cmp_nvim_lsp').default_capabilities()
         )
+
+
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = 'LSP actions',
             callback = function(event)
                 local opts = { buffer = event.buf }
-                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover({border = "rounded"})<cr>', opts)
                 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                 vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
                 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
@@ -31,7 +34,36 @@ return {
             end,
         })
 
-        require('lspconfig').gopls.setup({
+        vim.lsp.config('ols', {
+            init_options = {
+                checker_args = "-strict-style",
+                character_width = 80,
+                tabs = false,
+                newline_limit = 1,
+                tabs_width = 4,
+                enable_semantic_tokens = true,
+                enable_document_symbols = true,
+                enable_hover = true,
+                enable_snippets = true,
+                enable_inlay_hints = true,
+                enable_procedure_snippets = true
+            }
+        })
+        vim.lsp.enable('ols')
+
+        vim.lsp.config('jsonls', {})
+
+        -- ocaml
+        vim.lsp.config('ocamllsp', {
+            settings = {
+                ocamlformat = {
+                    enable = true
+                }
+            }
+        })
+        vim.lsp.enable('ocamllsp')
+
+        vim.lsp.config('gopls', {
             settings = {
                 gopls = {
                     semanticTokens = true,
@@ -39,6 +71,10 @@ return {
                     analyses = {
                         composites = false,
                         ST1021 = false,
+                        ST1003 = false,
+                        ST1012 = false,
+                        ST1020 = false,
+                        ST1000 = false,
                     },
                     staticcheck = true,
                     hints = {
@@ -48,9 +84,20 @@ return {
                 }
             }
         })
-        require('lspconfig').lua_ls.setup({})
+        vim.lsp.enable('gopls')
 
-        require('lspconfig').pylsp.setup({
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' }
+                    }
+                }
+            }
+        })
+        vim.lsp.enable('lua_ls')
+
+        vim.lsp.config('pylsp', {
             settings = {
                 pylsp = {
                     plugins = {

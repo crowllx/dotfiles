@@ -3,55 +3,6 @@
 -- Only required if you have packer configured as `opt`
 require("lazy").setup({
     { import = "plugins" },
-    {
-        'mellow-theme/mellow.nvim'
-    },
-    {
-        "dgox16/oldworld.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            local p = require("oldworld.palette")
-            require("oldworld").setup({
-                terminal_colors = true,
-                variant = "cooler",
-                highlight_overrides = {
-                    Normal = { bg = 'NONE' },
-                    NormalNC = { bg = 'NONE' },
-                    NormalFloat = { bg = 'NONE' },
-                    TelescopeNormal = { bg = 'NONE' },
-                    TelescopeBorder = { fg = p.gray4, bg = 'NONE' },
-                    TelescopePromptNormal = { bg = 'NONE' },
-                    TelescopePromptBorder = { fg = p.gray4, bg = 'NONE' },
-                    TelescopePreviewTitle = { bg = 'NONE' },
-                    TelescopeResultsTitle = { bg = 'NONE' },
-                    SignColumn = { bg = 'NONE' },
-                },
-                integrations = {
-                    telescope = true,
-                    cmp = true,
-                }
-            })
-        end
-    },
-    {
-        'rmehri01/onenord.nvim',
-        config = function()
-            local colors = require("onenord.colors").load()
-            require("onenord").setup({
-                fade_nc = true,
-                disable = {
-                    background = true,
-                    float_background = true,
-                    cursor_line = false
-                },
-                custom_highlights = {
-                    ["@type"] = { fg = colors.light_green },
-                    ["@module"] = { fg = colors.light_green },
-                }
-            })
-        end
-    },
     'vimwiki/vimwiki',
     'tpope/vim-commentary',
     'nvim-tree/nvim-web-devicons',
@@ -63,19 +14,41 @@ require("lazy").setup({
     },
     'MunifTanjim/nui.nvim',
     {
-        'catppuccin/nvim',
-        name = "catppuccin",
-        opts = {
-            transparent_background = true,
-            no_italic = true,
-            default_integrations = true,
-            integrations = {
-                cmp = true,
-                gitsigns = true,
-                nvimtree = true,
-                treesitter = true,
-            }
-        }
+        "vague-theme/vague.nvim",
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other plugins
+        config = function()
+            -- NOTE: you do not need to call setup if you don't want to.
+            require("vague").setup({
+                transparent = true,
+                italic = false,
+                bold = false,
+
+                -- override highlights
+                on_highlights = function(highlights, colors)
+                    highlights.WinSeparator = { fg = colors.line }
+                    highlights.Normal = { fg = colors.property }
+                    -- highlights.NvimTreeRootFolder = { fg = colors.propery }
+                    highlights.TelescopeBorder = { fg = colors.line }
+                    highlights.FloatBorder = { fg = colors.line }
+                    highlights.Delimiter = { fg = "#a7a8ab" }
+                    highlights.Type = { fg = colors.plus }
+                end,
+
+                colors = {
+                    string = "#A3BE8C",
+                    builtin = "#7e98e8"
+                }
+            })
+        end
+    },
+    {
+        'mellow-theme/mellow.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.mellow_transparent = true
+        end
     },
     {
         "rose-pine/neovim",
@@ -204,17 +177,6 @@ require("lazy").setup({
         end
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
-        lazy = true,
-        config = false,
-        init = function()
-            -- Disable automatic setup, we are doing it manually
-            vim.g.lsp_zero_extend_cmp = 0
-            vim.g.lsp_zero_extend_lspconfig = 0
-        end,
-    },
-    {
         'williamboman/mason.nvim',
         lazy = false,
         config = true,
@@ -245,4 +207,4 @@ require("lazy").setup({
     }
 
 })
-vim.cmd.colorscheme("onenord")
+vim.cmd.colorscheme("vague")
