@@ -1,5 +1,9 @@
 #!/bin/bash
 
-ln -s ~/tools/dotfiles/nvim ~/.config/nvim 
-ln -s ~/tools/dotfiles/.tmux.conf ~/.config/tmux/tmux.conf
-ln -s ~/tools/dotfiles/alacritty ~/.config/alacritty
+ln -sfrT config/nvim ~/.config/nvim 
+ln -sfrT config/.tmux.conf ~/.config/tmux/tmux.conf
+ln -sfrT config/alacritty ~/.config/alacritty
+ln -sfrT config/hypr ~/.config/hypr
+ln -sfrT config/waybar ~/.config/waybar
+ln -sfrT config/mako ~/.config/mako
+ln -sfrT config/niri ~/.config/niri

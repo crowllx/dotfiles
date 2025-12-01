@@ -1,0 +1,65 @@
+@import "./tokyo-night.css";
+
+* {
+
+  border-radius: 12px;
+  min-height: 0;
+  font-family: CaskaydiaMono Nerd Font Propo;
+  font-size: 16px;
+}
+
+#waybar {
+  background-color: alpha(@background, 0.99);
+  color: @foreground;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+  color: @foreground;
+}
+
+#workspaces button {
+  color: @foreground;
+  font-weight: 300;
+  border-radius: 15px;
+  padding: 2px 2px 2px 2px;
+  margin-left: 10px; 
+  margin-right: 10px; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+  transition: all 0.1s ease-in-out;
+}
+
+#workspaces button.active {
+    color: @accent;
+    background-color: transparent;
+        font-weight: 600;
+}
+
+#tray,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#clock,
+#custom-power-menu {
+  min-width: 12px;
+  padding: 2px 2px 2px 2px;
+  margin-left: 10px; 
+  margin-right: 10px; 
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+#custom-expand-icon {
+  margin-right: 12px;
+}
+
+tooltip {
+  padding: 2px;
+}

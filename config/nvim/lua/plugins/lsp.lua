@@ -1,19 +1,19 @@
 -- LSP
 return {
     'neovim/nvim-lspconfig',
+    dependencies = { 'saghen/blink.cmp' },
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-        { 'hrsh7th/cmp-nvim-lsp' },
-    },
     config = function()
         vim.lsp.buf.hover({ buffer = 'rounded' })
-        local lspconfig_defaults = require('lspconfig').util.default_config
-        lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-            'force',
-            lspconfig_defaults.capabilities,
-            require('cmp_nvim_lsp').default_capabilities()
-        )
+
+        -- define servers
+        local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+        vim.lsp.config('lua_ls', { capabilities = capabilities })
+        vim.lsp.config('gopls', { capabilities = capabilities })
+        vim.lsp.config('ocamllsp', { capabilities = capabilities })
+        vim.lsp.config('pylsp', { capabilities = capabilities })
 
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = 'LSP actions',
@@ -32,4 +32,5 @@ return {
             end,
         })
     end
+
 }
