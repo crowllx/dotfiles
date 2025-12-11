@@ -14,6 +14,7 @@ return {
         vim.lsp.config('gopls', { capabilities = capabilities })
         vim.lsp.config('ocamllsp', { capabilities = capabilities })
         vim.lsp.config('pylsp', { capabilities = capabilities })
+        vim.lsp.config('ols', { capabilities = capabilities })
 
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = 'LSP actions',

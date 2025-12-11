@@ -35,4 +35,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("options.lazy")
-vim.lsp.enable({ 'ocamllsp', 'gopls', 'lua_ls' })
+vim.lsp.enable({ 'ocamllsp', 'gopls', 'lua_ls', 'ols' })

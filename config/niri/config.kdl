@@ -60,6 +60,10 @@ input {
         // scroll-button-lock
         // middle-emulation
     }
+    
+    tablet {
+        map-to-output "DP-1"
+    }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
@@ -319,6 +323,13 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+}
+
+window-rule {
+    match title="^Epic Seven$"
+    open-floating true
+    default-column-width { fixed 1920; }
+    default-window-height { fixed 1080; }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
